@@ -4,19 +4,6 @@ from image import Img
 def findArea(startX:int, startY:int, endX:int, endY:int) -> int:
     return (endX - startX) * (endY - startY)
 
-def blackWhiteMask(img:Img, averageRGB:tuple, r:int = 20) -> Img:
-    x = 0
-    y = 0
-    while x < img.getSize()[0]:
-        y = 0
-        while y < img.getSize()[1]:
-            if (img.getDarkness(x, y)) > (img.sumRGB(averageRGB)) - r:
-                img.setRGB(x, y, 0, 0, 0)
-            else:
-                img.setRGB(x, y, 255, 255, 255)
-            y += 1
-        x += 1
-    return img
 
 def convToBin(img:Img, amountX:int, amountY:int, threshold:int, lineWidth:int = 5) -> tuple:
     ret = ""
@@ -70,7 +57,7 @@ def main():
     #img.save("out/enhance.jpeg")
     img.grayScale()
     img.convRGB()
-    img = blackWhiteMask(img, img.findAverageRGB(), 5)
+    img.blackWhiteMask(img, img.findAverageRGB(), 5)
     img.save("out/out.png")
 
     #amountX = int(input("How many accross?:  "))
