@@ -1,4 +1,5 @@
 # Dan Gallo
+# danGalloNexerDigital
 
 from math import cos, sin, radians, pi
 from image import Img
