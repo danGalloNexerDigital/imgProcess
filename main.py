@@ -8,7 +8,7 @@ def convToBin(img:Img, amountX:int, amountY:int, threshold:int, lineWidth:int = 
     ret = ""
     x = 0
     y = 0
-    while y <= int(img.getSize()[1] - 1):
+    while y <= int(img.getSize()[1] - 1): # -1 so it doesn't hit bounds (maybe just use <)
         x = 0
         while x <= int(img.getSize()[0] - 1):
             if (img.sumRGB(img.findAverageRGB(int(x), int(y), (img.getSize()[0] // amountX), (img.getSize()[1] // amountY)))) > threshold: # if the average RGB is higher then

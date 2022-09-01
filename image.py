@@ -2,25 +2,25 @@ from PIL import Image, ImageOps, ImageEnhance
 
 class Img:
     def __init__(self, imgPath:any) -> None:
-        if isinstance(imgPath, str):
+        if isinstance(imgPath, str): # str constructor
             self.__imgPath = imgPath
             self.__img = Image.open(imgPath)
             self.__pix = self.__img.load()
             self.__grayScale = False
-        elif isinstance(imgPath, Image.Image):
+        elif isinstance(imgPath, Image.Image): # overload constructor if Image.Image is passed in
             self.__img = imgPath
             self.__pix = self.__img.load()
-            self.__grayScale = False
+            self.__grayScale = False # TODO: should first convert it to 'RGB' format
 
     def convRGB(self) -> None:
         self.__img = self.__img.convert('RGB')
         self.__pix = self.__img.load()
         self.__grayScale = False
 
-    def getSize(self) -> tuple:
+    def getSize(self) -> tuple: # (width, height) format
         return self.__img.size
 
-    def getRGBVal(self, xPos:int, yPos:int) -> tuple:
+    def getRGBVal(self, xPos:int, yPos:int) -> tuple: # (R, G, B) format
         if isinstance(self.__pix[xPos, yPos], tuple):
             return self.__pix[xPos, yPos]
         return(self.__pix[xPos, yPos] // 3, self.__pix[xPos, yPos] // 3, self.__pix[xPos, yPos] // 3)
@@ -53,31 +53,31 @@ class Img:
     def save(self, newImgName:str) -> None:
         self.__img.save(newImgName)
 
-    def grayScale(self): # This will change the format of the image to only black and white
+    def grayScale(self) -> None: # This will change the format of the image to only black and white
         self.__grayScale = True
         self.__img = (ImageOps.grayscale(self.__img))
         self.__pix = self.__img.load()
 
-    def invert(self):
+    def invert(self) -> None:
         self.__img = (ImageOps.invert(self.__img))
         self.__pix = self.__img.load()
 
-    def equalise(self):
+    def equalise(self) -> None:
         self.__img = (ImageOps.equalize(self.__img))
         self.__pix = self.__img.load()
 
-    def solarise(self, threshold:int):
+    def solarise(self, threshold:int) -> None: # maybe should always be called after gray scale?
         self.__img = (ImageOps.solarize(self.__img, threshold))
         self.__pix = self.__img.load()
 
-    def normalise(self):
-        self.__img = (ImageOps.autocontrast(self.__img))
+    def normalise(self) -> None:
+        self.__img = (ImageOps.autocontrast(self.__img)) # think this is normalisation?
         self.__pix = self.__img.load()
 
-    def enhance(self, color:float, contrast:float, brightness:float, sharpness:float):
+    def enhance(self, color:float, contrast:float, brightness:float, sharpness:float) -> None:
         enhancer = ImageEnhance.Color(self.__img)
         self.__img = enhancer.enhance(color)
-        self.__pix = self.__img.load()
+        self.__pix = self.__img.load() # not sure if this should just be called once at the end?
         enhancer = ImageEnhance.Contrast(self.__img)
         self.__img = enhancer.enhance(contrast)
         self.__pix = self.__img.load()
@@ -94,17 +94,17 @@ class Img:
         return self.getDarkness(0, 0) - self.getDarkness(self.getSize()[0] - 1, self.getSize()[1] - 1) / (self.getSize()[0])
 
     # TODO: fix
-    def linearLightingCorrection(self) -> None:
+    def linearLightingCorrection(self) -> None: # should correct for the lighting gradient assuming that lighting is a linear function dependent on the x or y position of the image
         gradient = self.findLinearLightingGradient()
         baseVal = -1 * (self.sumRGB(self.findAverageRGB()) - 255)
         for x in range(1, self.getSize()[0]):
             for y in range(self.getSize()[1]):
                 self.setDarkness(x, y, int((self.getDarkness(x, y)) * ((x / self.getSize()[0])* gradient)))
 
-    def sumRGB(self, RGB:tuple) -> int:
+    def sumRGB(self, RGB:tuple) -> int: # 0 -> 255
         return (RGB[0] + RGB[1] + RGB[2]) // 3
 
-    def findAverageRGB(self, startX:int = 0, startY:int = 0, width:int = "WIDTH", height:int = "HEIGHT") -> tuple:
+    def findAverageRGB(self, startX:int = 0, startY:int = 0, width:int = "WIDTH", height:int = "HEIGHT") -> tuple: # (R, G, B) where R, G and B are 0 -> 255
         if width == "WIDTH":
             width = self.getSize()[0]
         if height == "HEIGHT":
