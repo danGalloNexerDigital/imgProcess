@@ -47,7 +47,7 @@ class Img:
             for j in range(startY, startY + height):
                 self.setRGB(i, j, RGB[0], RGB[1], RGB[2])
 
-    def getPath(self):
+    def getPath(self) -> str:
         return self.__imgPath
 
     def save(self, newImgName:str) -> None:
@@ -88,6 +88,7 @@ class Img:
         self.__img = enhancer.enhance(sharpness)
         self.__pix = self.__img.load()
 
+    # TODO: fix
     def findLinearLightingGradient(self) -> int:
         self.equalise()
         return self.getDarkness(0, 0) - self.getDarkness(self.getSize()[0] - 1, self.getSize()[1] - 1) / (self.getSize()[0])
