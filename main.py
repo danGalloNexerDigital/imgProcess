@@ -1,3 +1,5 @@
+# Dan Gallo
+
 from math import cos, sin, radians, pi
 from image import Img
 
@@ -64,7 +66,7 @@ def main():
     #amountY = int(input("How many vertical?: "))
     amountY = 7
     binary = convToBin(img, amountX, amountY, 50) # binary[0] is the output string, binary[1] is the image with the lines added in (for testing)
-    print(binary[0])
+    print(binary[0]) # Binary output
     binary[1].save("out/lines.png")
     regenImg(img, binary[0], (255, 0, 255)).save("out/finalOut.png")
 

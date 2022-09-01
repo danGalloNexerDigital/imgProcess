@@ -1,6 +1,8 @@
 # Silk Card Process
 ## Code
 
+> To run the code type 'python main.py' python also needs to be added to windows path
+
 ### Dependencies
 - Python
 - PIL
@@ -144,6 +146,7 @@ There are functions here which will be useful in the future:
 - Work on better circle detection instead of just using averages
 - Send the data to a locally hosted server to be drawn with canvas
   - Could use the same framework as teams status used (expressjs)
+  - use python requests library to post to a server and then handle that through expressjs (POST and GET)
 - **Improve efficiency**
   - Improve the speed
   - Replace loops
