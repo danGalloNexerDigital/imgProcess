@@ -4,7 +4,6 @@ from image import Img
 def findArea(startX:int, startY:int, endX:int, endY:int) -> int:
     return (endX - startX) * (endY - startY)
 
-
 def convToBin(img:Img, amountX:int, amountY:int, threshold:int, lineWidth:int = 5) -> tuple:
     ret = ""
     x = 0
@@ -16,7 +15,7 @@ def convToBin(img:Img, amountX:int, amountY:int, threshold:int, lineWidth:int = 
                 ret += "1" # circle is present
             else:
                 ret += "0" # circle is not present
-            for j in range(lineWidth):
+            for j in range(lineWidth): # Draws lines
                 for i in range(int(img.getSize()[1] / amountY)):
                     img.setRGB(x + j, y + i, 255, 0, 0)
                 for k in range(int(img.getSize()[0] / amountX)):
@@ -40,7 +39,7 @@ def regenImg(img:Img, inp:str, RGB:tuple) -> None: # NOTE: input str must be XXX
                 while i < (2 * pi): # i is in radians
                     for j in range(int(loop)): # to fill the circle
                         img.setRGB((x * radiusX * 2) + (j * cos(i)) + radiusX, (y *  radiusY * 2) + (radiusY * sin(i)) + radiusY, RGB[0], RGB[1], RGB[2])
-                    i += 0.01
+                    i += 0.01 # the smaller this value the longer it takes but the more accurate the circle
     return img
 
 def main():

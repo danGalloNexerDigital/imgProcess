@@ -8,7 +8,7 @@
   - ImageOps
   - ImageEnhance
 - Math
-  - cos, sin, radians, floor
+  - cos, sin, radians, floor, pi
 
 ### __old/
 Two previous attempts are stored here
@@ -73,21 +73,22 @@ There are functions here which will be useful in the future:
 - enhance(color:float, contrast:float, brightness:float, sharpness: float) -> None
   - These values should be adjusted
 - findLinearLightingGradient() -> int
+  - fix
   - equalises the image then finds the change in darkness divided by the change in width
 - linearLightingCorrection() -> None
-  - doesn't work but isn't used 
+  - fix
+  - will use the gradient to correct the change in lighting as the X or Y of the image increases
 - sumRGB(RGB:tuple) -> int (0 -> 255)
   - adds RGB[0], RGB[1] and RGB[2]
   - then divides by 3 and returns this
 - findAverageRGB(startX:int = 0, startY:int = 0, width:int = img.getSize()[0], height:int = img.getSize()[1]) -> tuple
   - finds the average RGB over a specified area
-
-### Other functions used (still working on)
-- blackWhiteMask(img:Img, averageRGB:tuple, r:int = 20) -> Img
-  - This will later become a method the the Img class
-  - sets all pixels with a darkness < averageDarkness + r to black
+- blackWhiteMask(averageRGB:tuple, threshold:int = 20) -> Img
+  - sets all pixels with a darkness > averageDarkness + r to black
   - sets pixels that dont satisfy this condition to white
   - returns the modified Img object
+
+### Other functions used (still working on)
 - convToBin(img:Img, amountX:int, amountY:int) -> tuple
   - amountX is the amount of hole punches across
   - amountY is the amount of hole punches down

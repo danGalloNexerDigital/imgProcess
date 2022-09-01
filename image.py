@@ -104,7 +104,6 @@ class Img:
     def sumRGB(self, RGB:tuple) -> int:
         return (RGB[0] + RGB[1] + RGB[2]) // 3
 
-    # This can be optimised (it is called twice but not stored)
     def findAverageRGB(self, startX:int = 0, startY:int = 0, width:int = "WIDTH", height:int = "HEIGHT") -> tuple:
         if width == "WIDTH":
             width = self.getSize()[0]
