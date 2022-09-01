@@ -57,7 +57,7 @@ def main():
     #img.save("out/enhance.jpeg")
     img.grayScale()
     img.convRGB()
-    img.blackWhiteMask(img, img.findAverageRGB(), 5)
+    img.blackWhiteMask(img.findAverageRGB(), 5)
     img.save("out/out.png")
 
     #amountX = int(input("How many accross?:  "))
