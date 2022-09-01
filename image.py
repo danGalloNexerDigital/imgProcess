@@ -125,3 +125,15 @@ class Img:
         G = G // (width * height)
         B = B // (width * height)
         return (R, G, B)
+
+    def blackWhiteMask(self, averageRGB:tuple, threshold:int = 20) -> None:
+        x = 0
+        while x < self.getSize()[0]:
+            y = 0
+            while y < self.getSize()[1]:
+                if (self.getDarkness(x, y)) > (self.sumRGB(averageRGB)) - threshold:
+                    self.setRGB(x, y, 0, 0, 0)
+                else:
+                    self.setRGB(x, y, 255, 255, 255)
+                y += 1
+            x += 1
