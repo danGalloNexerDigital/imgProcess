@@ -125,7 +125,7 @@ There are functions here which will be useful in the future:
 
 ### Background
 - I have placed the cards on white paper
-- This ensure good contrast between the brown card and the background
+- This ensures good contrast between the brown card and the background
 - The image taken must be straight or it will not be properly converted
 - The cards also must line up
 
@@ -144,10 +144,21 @@ There are functions here which will be useful in the future:
 - Send the data to a locally hosted server to be drawn with canvas
   - Could use the same framework as teams status used (expressjs)
 - **Improve efficiency**
+  - Improve the speed
+  - Replace loops
+  - Look into using more library calls (they will be faster)
+  - Don't save between each filter
+- Fix linear gradient function
+  - Take into account non-linear lighting
+  - Take into account changes to lighting over both X and Y
+- Potentially look at edge detection
+  - used for the edge of cards
+  - could help with aliigning them 
+  - checking if the cards are alligned
 
 ### Pictures
 - Standardising the lighting
-- Different coloured background (green maybe)
+- Different coloured background (green maybe) to constrast even more from the brown
 - Using camera filters or a higher resolution camera
 
 ### Use cases

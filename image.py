@@ -53,7 +53,7 @@ class Img:
     def save(self, newImgName:str) -> None:
         self.__img.save(newImgName)
 
-    def grayScale(self):
+    def grayScale(self): # This will change the format of the image to only black and white
         self.__grayScale = True
         self.__img = (ImageOps.grayscale(self.__img))
         self.__pix = self.__img.load()
@@ -102,11 +102,9 @@ class Img:
                 self.setDarkness(x, y, int((self.getDarkness(x, y)) * ((x / self.getSize()[0])* gradient)))
 
     def sumRGB(self, RGB:tuple) -> int:
-        ret = 0
-        for i in range(3):
-            ret += RGB[i]
-        return ret // 3
+        return (RGB[0] + RGB[1] + RGB[2]) // 3
 
+    # This can be optimised (it is called twice but not stored)
     def findAverageRGB(self, startX:int = 0, startY:int = 0, width:int = "WIDTH", height:int = "HEIGHT") -> tuple:
         if width == "WIDTH":
             width = self.getSize()[0]
